@@ -1,14 +1,11 @@
 ﻿using Android.App;
-using Android.Widget;
 using Android.OS;
-using Android.Support.V7.App;
 using System.Collections.Generic;
 
-using Android.Util;
-using WordPressPCL;
 using WordPressRestApiStandard;
 using WordPressRestApiStandard.Models;
 using Android.Support.V7.Widget;
+using Android.Views;
 
 namespace shinyichen
 {
@@ -41,8 +38,14 @@ namespace shinyichen
             layoutManager = new LinearLayoutManager(this);
             postListView.SetLayoutManager(layoutManager);
 
-            postListAdapter = new PostListAdapter(posts, client);
+            postListAdapter = new PostListAdapter(posts, client, this.BaseContext);
             postListView.SetAdapter(postListAdapter);
+
+            // improve the image flicking issues
+            postListView.HasFixedSize = true;
+            postListView.SetItemViewCacheSize(10);
+            postListView.DrawingCacheEnabled = true;
+            postListView.DrawingCacheQuality = Android.Views.DrawingCacheQuality.High;
 
         }
 

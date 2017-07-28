@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using Square.Picasso;
 using WordPressRestApiStandard;
 using WordPressRestApiStandard.Models;
 using WordPressRestApiStandard.QueryModel;
@@ -15,11 +18,16 @@ namespace shinyichen
     {
         private WordPressApiClient wpClient;
         private List<Post> posts;
+        private Android.Content.Context context;
+        Picasso picasso;
 
-        public PostListAdapter(List<Post> posts, WordPressApiClient wpClient)
+        public PostListAdapter(List<Post> posts, WordPressApiClient wpClient, Android.Content.Context context)
         {
             this.posts = posts;
             this.wpClient = wpClient;
+            this.context = context;
+            picasso = Picasso.With(context);
+            picasso.IndicatorsEnabled = true;
         }
 
         public override int ItemCount {
@@ -31,14 +39,23 @@ namespace shinyichen
         public override async void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             PostViewHolder vh = holder as PostViewHolder;
+            //Picasso.With(context).CancelRequest(vh.PostImageView);
             Post post = posts[position];
             vh.PostTitleView.Text = post.Title.Rendered;
             if (post.FeaturedMedia > 0)
             {
                 Media media = await wpClient.GetMedia(new MediaQuery(), post.FeaturedMedia);
-                string url = media.MediaDetails.Sizes.Thumbnail.SourceUrl;
+                string url = media.MediaDetails.Sizes.Medium.SourceUrl;
                 Log.Info("adapter", url);
-                // TODO set image view
+
+                // set image view
+                //Picasso p = Picasso.With(context);
+                picasso.Load(url).Into(vh.PostImageView);
+
+                //Bitmap image = GetBitmapFromUrl(url);
+                //vh.PostImageView.SetImageBitmap(image);
+            } else {
+                vh.PostImageView.SetImageDrawable(null);
             }
         }
 
@@ -48,6 +65,29 @@ namespace shinyichen
             PostViewHolder vh = new PostViewHolder(view);
             return vh;
         }
+
+		private Bitmap GetBitmapFromUrl(string url)
+		{
+			Bitmap image = null;
+
+			WebClient webClient = new WebClient();
+			var imageBytes = webClient.DownloadData(url);
+			if (imageBytes != null && imageBytes.Length > 0)
+			{
+				Bitmap fullImage = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+				int r = fullImage.Width / 200;
+                if (r < 1)
+                    return fullImage;
+                else
+                {
+                    image = Bitmap.CreateScaledBitmap(fullImage, 200, fullImage.Height / r, true);
+                    fullImage.Recycle();
+                }
+
+			}
+
+			return image;
+		}
     }
 
     public class PostViewHolder : RecyclerView.ViewHolder 
