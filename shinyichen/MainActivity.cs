@@ -1,4 +1,4 @@
-﻿using Android.App;
+﻿﻿using Android.App;
 using Android.OS;
 using System.Collections.Generic;
 
@@ -45,7 +45,7 @@ namespace shinyichen
             postListView.HasFixedSize = true;
             postListView.SetItemViewCacheSize(10);
             postListView.DrawingCacheEnabled = true;
-            postListView.DrawingCacheQuality = Android.Views.DrawingCacheQuality.High;
+            postListView.DrawingCacheQuality = DrawingCacheQuality.High;
 
         }
 

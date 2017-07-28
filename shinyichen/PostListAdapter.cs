@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
-using Android.Webkit;
 using Android.Widget;
 using Square.Picasso;
 using WordPressRestApiStandard;

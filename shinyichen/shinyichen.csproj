@@ -60,6 +60,9 @@
     <Reference Include="WordpressRest">
       <HintPath>..\packages\zji.wordpress.core.1.0.0\lib\netstandard1.6\WordpressRest.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="FubarCoder.RestSharp.Portable.Core">
       <HintPath>..\packages\FubarCoder.RestSharp.Portable.Core.4.0.8\lib\monoandroid10\FubarCoder.RestSharp.Portable.Core.dll</HintPath>
     </Reference>
@@ -68,18 +71,6 @@
     </Reference>
     <Reference Include="WordPressRestApiStandard">
       <HintPath>..\packages\WmBarrettSimms.WordPressRestApiStandard.1.0.0\lib\netstandard1.4\WordPressRestApiStandard.dll</HintPath>
-    </Reference>
-    <Reference Include="Square.Picasso">
-      <HintPath>..\packages\Square.Picasso.2.5.2.1\lib\MonoAndroid\Square.Picasso.dll</HintPath>
-    </Reference>
-    <Reference Include="Square.OkIO">
-      <HintPath>..\packages\Square.OkIO.1.13.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
-    </Reference>
-    <Reference Include="Square.OkHttp">
-      <HintPath>..\packages\Square.OkHttp.2.7.5.0\lib\MonoAndroid\Square.OkHttp.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
