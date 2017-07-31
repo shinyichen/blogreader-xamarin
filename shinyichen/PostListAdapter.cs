@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Android.Graphics;
 using Android.Support.V7.Widget;
@@ -18,6 +19,7 @@ namespace shinyichen
         private List<Post> posts;
         private Android.Content.Context context;
         Picasso picasso;
+        public event EventHandler<int> ItemClick;
 
         public PostListAdapter(List<Post> posts, WordPressApiClient wpClient, Android.Content.Context context)
         {
@@ -60,7 +62,7 @@ namespace shinyichen
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.PostCard, parent, false);
-            PostViewHolder vh = new PostViewHolder(view);
+            PostViewHolder vh = new PostViewHolder(view, OnClick);
             return vh;
         }
 
@@ -86,6 +88,12 @@ namespace shinyichen
 
 			return image;
 		}
+
+        void OnClick(int position) {
+            if (ItemClick != null) {
+                ItemClick(this, position);
+            }
+        }
     }
 
     public class PostViewHolder : RecyclerView.ViewHolder 
@@ -93,10 +101,12 @@ namespace shinyichen
         public ImageView PostImageView { get; private set; }
         public TextView PostTitleView { get; private set; }
 
-        public PostViewHolder(View view) : base(view)
+        public PostViewHolder(View view, Action<int> listener) : base(view)
         {
             PostImageView = view.FindViewById<ImageView>(Resource.Id.postImageView);
             PostTitleView = view.FindViewById<TextView>(Resource.Id.postTitleView);
+
+            view.Click += (sender, e) => listener(base.Position);
         }
     }
 }

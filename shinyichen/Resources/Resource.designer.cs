@@ -1655,13 +1655,19 @@ namespace shinyichen
 			public const int parentPanel = 2131165230;
 			
 			// aapt resource value: 0x7f07005f
-			public const int postImageView = 2131165279;
+			public const int postATitleView = 2131165279;
+			
+			// aapt resource value: 0x7f070060
+			public const int postAWebView = 2131165280;
+			
+			// aapt resource value: 0x7f070061
+			public const int postImageView = 2131165281;
 			
 			// aapt resource value: 0x7f070051
 			public const int postListView = 2131165265;
 			
-			// aapt resource value: 0x7f070060
-			public const int postTitleView = 2131165280;
+			// aapt resource value: 0x7f070062
+			public const int postTitleView = 2131165282;
 			
 			// aapt resource value: 0x7f070006
 			public const int progress_circular = 2131165190;
@@ -1930,19 +1936,22 @@ namespace shinyichen
 			public const int notification_template_part_time = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int PostCard = 2130968610;
+			public const int Post = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int select_dialog_item_material = 2130968611;
+			public const int PostCard = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int select_dialog_multichoice_material = 2130968612;
+			public const int select_dialog_item_material = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int select_dialog_singlechoice_material = 2130968613;
+			public const int select_dialog_multichoice_material = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int support_simple_spinner_dropdown_item = 2130968614;
+			public const int select_dialog_singlechoice_material = 2130968614;
+			
+			// aapt resource value: 0x7f040027
+			public const int support_simple_spinner_dropdown_item = 2130968615;
 			
 			static Layout()
 			{

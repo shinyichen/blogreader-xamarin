@@ -6,6 +6,7 @@ using WordPressRestApiStandard;
 using WordPressRestApiStandard.Models;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Content;
 
 namespace shinyichen
 {
@@ -39,6 +40,7 @@ namespace shinyichen
             postListView.SetLayoutManager(layoutManager);
 
             postListAdapter = new PostListAdapter(posts, client, this.BaseContext);
+            postListAdapter.ItemClick += ItemClickCallback;
             postListView.SetAdapter(postListAdapter);
 
             // improve the image flicking issues
@@ -47,6 +49,20 @@ namespace shinyichen
             postListView.DrawingCacheEnabled = true;
             postListView.DrawingCacheQuality = DrawingCacheQuality.High;
 
+            // TODO load more
+            // TODO refresh
+
+        }
+
+        private void ItemClickCallback(object sender, int pos) {
+            Post post = posts[pos];
+            Bundle bundle = new Bundle();
+            bundle.PutInt("id", post.Id);
+            bundle.PutString("title", post.Title.Rendered);
+            bundle.PutString("content", post.Content.Rendered);
+            Intent intent = new Intent(this, typeof(PostActivity) );
+            intent.PutExtra("post", bundle);
+            StartActivity(intent);
         }
 
     }
