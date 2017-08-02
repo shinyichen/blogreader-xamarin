@@ -8,9 +8,11 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Content;
 
+using Newtonsoft.Json;
+
 namespace shinyichen
 {
-    [Activity(Label = "android", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "android", MainLauncher = true, Icon = "@mipmap/icon", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
     public class MainActivity : Activity
     {
 		private string url = "http://shinyichen.com/blog/wp-json/wp/v2/";
@@ -32,10 +34,14 @@ namespace shinyichen
             SetContentView(Resource.Layout.Main);
 
             // load posts
-			WordPressApiClient client = new WordPressApiClient(url);
+            WordPressApiClient client = new WordPressApiClient(url);
 
-			posts = await client.GetPosts(new WordPressRestApiStandard.QueryModel.PostsQuery() { PerPage = 8 });
-
+            if (posts == null || posts.Count == 0) { 
+	            if (savedInstanceState != null && savedInstanceState.GetString("posts") != null)
+	                posts = JsonConvert.DeserializeObject<List<Post>>(savedInstanceState.GetString("posts"));
+	            else
+	                posts = await client.GetPosts(new WordPressRestApiStandard.QueryModel.PostsQuery() { PerPage = 8 });
+            }
             postListView = FindViewById<RecyclerView>(Resource.Id.postListView);
             layoutManager = new LinearLayoutManager(this);
             postListView.SetLayoutManager(layoutManager);
@@ -53,6 +59,13 @@ namespace shinyichen
             // TODO load more
             // TODO refresh
 
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            string posts_str = JsonConvert.SerializeObject(posts);
+            outState.PutString("posts", posts_str);
+            base.OnSaveInstanceState(outState);
         }
 
         private void ItemClickCallback(object sender, int pos) {
