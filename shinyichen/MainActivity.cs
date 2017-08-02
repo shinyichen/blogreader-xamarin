@@ -26,6 +26,7 @@ namespace shinyichen
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            ActionBar.SetTitle(Resource.String.app_name);
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);

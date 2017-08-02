@@ -1655,19 +1655,16 @@ namespace shinyichen
 			public const int parentPanel = 2131165230;
 			
 			// aapt resource value: 0x7f07005f
-			public const int postATitleView = 2131165279;
+			public const int postAWebView = 2131165279;
 			
 			// aapt resource value: 0x7f070060
-			public const int postAWebView = 2131165280;
-			
-			// aapt resource value: 0x7f070061
-			public const int postImageView = 2131165281;
+			public const int postImageView = 2131165280;
 			
 			// aapt resource value: 0x7f070051
 			public const int postListView = 2131165265;
 			
-			// aapt resource value: 0x7f070062
-			public const int postTitleView = 2131165282;
+			// aapt resource value: 0x7f070061
+			public const int postTitleView = 2131165281;
 			
 			// aapt resource value: 0x7f070006
 			public const int progress_circular = 2131165190;
