@@ -88,6 +88,8 @@
     <Compile Include="Resources\resource.designer.cs" />
     <Compile Include="PostListAdapter.cs" />
     <Compile Include="PostActivity.cs" />
+    <Compile Include="PostFragment.cs" />
+    <Compile Include="PostPagerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,6 +107,7 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\PostCard.axml" />
     <AndroidResource Include="Resources\layout\Post.axml" />
+    <AndroidResource Include="Resources\layout\PostActivityLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

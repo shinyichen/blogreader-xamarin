@@ -13,34 +13,42 @@ using Android.Widget;
 using Android.Webkit;
 using WordPressRestApiStandard.Models;
 using static Android.Webkit.WebSettings;
+using Android.Support.V4.App;
+using Android.Support.V4.View;
+using Newtonsoft.Json;
 
 namespace shinyichen
 {
     [Activity(Label = "PostActivity", ParentActivity = typeof(MainActivity))]
-    public class PostActivity : Activity
+    public class PostActivity : FragmentActivity
     {
-        private WebView postWebView;
+        //private WebView postWebView;
 
         // TODO slide post view
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Bundle bundle = Intent.GetBundleExtra("post");
-            int id = bundle.GetInt("id");
-            string title = bundle.GetString("title");
-            ActionBar.Title = title;
+            Bundle bundle = Intent.GetBundleExtra("args");
+            string posts_str = bundle.GetString("posts");
+            int selected = bundle.GetInt("selected");
+            List<Post> posts = JsonConvert.DeserializeObject<List<Post>>(posts_str);
+
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
-            string content = bundle.GetString("content");
+            //string content = bundle.GetString("content");
 
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Post);
-            postWebView = FindViewById<WebView>(Resource.Id.postAWebView);
-            postWebView.Settings.JavaScriptEnabled = true;
-            //postWebView.Settings.LoadWithOverviewMode = true;
-            //postWebView.Settings.UseWideViewPort = true;
-            postWebView.Settings.SetLayoutAlgorithm(LayoutAlgorithm.TextAutosizing);
-            postWebView.LoadData(content, "text/html; charset=UTF-8", null);
+            SetContentView(Resource.Layout.PostActivityLayout);
+            //postWebView = FindViewById<WebView>(Resource.Id.postAWebView);
+            //postWebView.Settings.JavaScriptEnabled = true;
+            //postWebView.Settings.SetLayoutAlgorithm(LayoutAlgorithm.TextAutosizing);
+            //postWebView.LoadData(content, "text/html; charset=UTF-8", null);
+
+            PostPagerAdapter adapter = new PostPagerAdapter(SupportFragmentManager, posts);
+
+            ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.postViewPager);
+            viewPager.Adapter = adapter;
+            viewPager.CurrentItem = selected;
         }
     }
 }

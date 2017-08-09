@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace shinyichen
 {
-    [Activity(Label = "android", MainLauncher = true, Icon = "@mipmap/icon", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
+    [Activity(Label = "android", MainLauncher = true, Icon = "@mipmap/icon", LaunchMode = Android.Content.PM.LaunchMode.SingleTop, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation)]
     public class MainActivity : Activity
     {
 		private string url = "http://shinyichen.com/blog/wp-json/wp/v2/";
@@ -69,13 +69,15 @@ namespace shinyichen
         }
 
         private void ItemClickCallback(object sender, int pos) {
+
+            string posts_str = JsonConvert.SerializeObject(posts);
             Post post = posts[pos];
+
             Bundle bundle = new Bundle();
-            bundle.PutInt("id", post.Id);
-            bundle.PutString("title", post.Title.Rendered);
-            bundle.PutString("content", post.Content.Rendered);
+            bundle.PutString("posts", posts_str);
+            bundle.PutInt("selected", pos);
             Intent intent = new Intent(this, typeof(PostActivity) );
-            intent.PutExtra("post", bundle);
+            intent.PutExtra("args", bundle);
             StartActivity(intent);
         }
 
