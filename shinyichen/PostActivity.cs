@@ -34,6 +34,12 @@ namespace shinyichen
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.postViewPager);
             viewPager.Adapter = adapter;
             viewPager.CurrentItem = selected;
+
+
+            viewPager.PageSelected += (object sender, ViewPager.PageSelectedEventArgs args) =>
+            {
+                ActionBar.Title = posts[args.Position].Title.Rendered;
+            };
         }
     }
 }
