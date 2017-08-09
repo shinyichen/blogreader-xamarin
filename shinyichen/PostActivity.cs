@@ -39,10 +39,6 @@ namespace shinyichen
 
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PostActivityLayout);
-            //postWebView = FindViewById<WebView>(Resource.Id.postAWebView);
-            //postWebView.Settings.JavaScriptEnabled = true;
-            //postWebView.Settings.SetLayoutAlgorithm(LayoutAlgorithm.TextAutosizing);
-            //postWebView.LoadData(content, "text/html; charset=UTF-8", null);
 
             PostPagerAdapter adapter = new PostPagerAdapter(SupportFragmentManager, posts);
 

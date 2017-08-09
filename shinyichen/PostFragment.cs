@@ -44,9 +44,9 @@ namespace shinyichen
             View view = inflater.Inflate(Resource.Layout.Post, null); // NOTE: using container as second arguement will get error
 			postWebView = view.FindViewById<WebView>(Resource.Id.postAWebView);
 			postWebView.Settings.JavaScriptEnabled = true;
-			//postWebView.Settings.LoadWithOverviewMode = true;
-			//postWebView.Settings.UseWideViewPort = true;
-            postWebView.Settings.SetLayoutAlgorithm(LayoutAlgorithm.Normal);
+			postWebView.Settings.LoadWithOverviewMode = true;
+			postWebView.Settings.UseWideViewPort = true;
+            postWebView.Settings.SetLayoutAlgorithm(LayoutAlgorithm.TextAutosizing);
 			postWebView.LoadData(content, "text/html; charset=UTF-8", null);
             return view;
         }
