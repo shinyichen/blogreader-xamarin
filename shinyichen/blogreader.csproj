@@ -90,6 +90,7 @@
     <Compile Include="PostActivity.cs" />
     <Compile Include="PostFragment.cs" />
     <Compile Include="PostPagerAdapter.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

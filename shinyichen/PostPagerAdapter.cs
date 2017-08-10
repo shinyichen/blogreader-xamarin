@@ -1,7 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using Android.Support.V4.App;
-using WordPressRestApiStandard;
 using WordPressRestApiStandard.Models;
 
 namespace shinyichen

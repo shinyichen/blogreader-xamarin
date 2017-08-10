@@ -24,6 +24,7 @@ namespace shinyichen
         private RecyclerView.LayoutManager layoutManager;
         private PostListAdapter postListAdapter;
 
+        private const string POSTS = "posts";
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -37,8 +38,8 @@ namespace shinyichen
             WordPressApiClient client = new WordPressApiClient(url);
 
             if (posts == null || posts.Count == 0) { 
-	            if (savedInstanceState != null && savedInstanceState.GetString("posts") != null)
-	                posts = JsonConvert.DeserializeObject<List<Post>>(savedInstanceState.GetString("posts"));
+	            if (savedInstanceState != null && savedInstanceState.GetString(POSTS) != null)
+	                posts = JsonConvert.DeserializeObject<List<Post>>(savedInstanceState.GetString(POSTS));
 	            else
 	                posts = await client.GetPosts(new WordPressRestApiStandard.QueryModel.PostsQuery() { PerPage = 8 });
             }
@@ -64,7 +65,7 @@ namespace shinyichen
         protected override void OnSaveInstanceState(Bundle outState)
         {
             string posts_str = JsonConvert.SerializeObject(posts);
-            outState.PutString("posts", posts_str);
+            outState.PutString(POSTS, posts_str);
             base.OnSaveInstanceState(outState);
         }
 
@@ -74,10 +75,10 @@ namespace shinyichen
             Post post = posts[pos];
 
             Bundle bundle = new Bundle();
-            bundle.PutString("posts", posts_str);
-            bundle.PutInt("selected", pos);
+            bundle.PutString(Constants.ARG_POSTS, posts_str);
+            bundle.PutInt(Constants.ARG_SELECTED, pos);
             Intent intent = new Intent(this, typeof(PostActivity) );
-            intent.PutExtra("args", bundle);
+            intent.PutExtra(Constants.ARG_ARGUMENTS, bundle);
             StartActivity(intent);
         }
 
